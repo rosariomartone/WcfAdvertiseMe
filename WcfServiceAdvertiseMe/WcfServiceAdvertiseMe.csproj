@@ -62,7 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ServiceAdvertiseMe.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IServiceAdvertiseMe.cs" />
@@ -86,6 +88,10 @@
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{7712ee04-ff65-4b6e-91f4-1116671764cd}</Project>
       <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FactoryEntities\FactoryEntities.csproj">
+      <Project>{3a16e1b3-6268-46bf-88a0-edce83693a84}</Project>
+      <Name>FactoryEntities</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

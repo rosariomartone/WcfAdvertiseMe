@@ -15,6 +15,6 @@ namespace WcfServiceAdvertiseMe
     {
         [OperationContract]
         [WebInvoke(Method ="GET", UriTemplate = "/PointsByGPSPosition/{gpsPosition}", RequestFormat =WebMessageFormat.Json,ResponseFormat =WebMessageFormat.Json,BodyStyle =WebMessageBodyStyle.Wrapped)]
-        List<IPub> GetPointsByGPSPosition(string gpsPosition);
+        string GetPointsByGPSPosition(string gpsPosition);
     }
 }

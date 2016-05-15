@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.Text;
 
 using FactoryEntities;
+using Newtonsoft.Json;
 
 namespace WcfServiceAdvertiseMe
 {
@@ -14,7 +15,7 @@ namespace WcfServiceAdvertiseMe
     // NOTE: In order to launch WCF Test Client for testing this service, please select ServiceAdvertiseMe.svc or ServiceAdvertiseMe.svc.cs at the Solution Explorer and start debugging.
     public class ServiceAdvertiseMe : IServiceAdvertiseMe
     {
-        public List<IPub> GetPointsByGPSPosition(string gpsPosition)
+        public string GetPointsByGPSPosition(string gpsPosition)
         {
             IPub obj = FactoryPub.CreateInstance();
             obj.Name = "Rosario Martone";
@@ -24,7 +25,7 @@ namespace WcfServiceAdvertiseMe
             List<IPub> pubs = new List<IPub>();
             pubs.Add(obj);
 
-            return pubs;
+            return JsonConvert.SerializeObject(pubs);
         }
     }
 }

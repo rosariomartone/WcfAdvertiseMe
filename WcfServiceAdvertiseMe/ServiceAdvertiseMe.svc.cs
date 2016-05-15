@@ -8,6 +8,7 @@ using System.Text;
 
 using FactoryEntities;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace WcfServiceAdvertiseMe
 {
@@ -24,8 +25,13 @@ namespace WcfServiceAdvertiseMe
 
             List<IPub> pubs = new List<IPub>();
             pubs.Add(obj);
+            JsonSerializerSettings jss = new JsonSerializerSettings();
 
-            return JsonConvert.SerializeObject(pubs);
+            DefaultContractResolver dcr = new DefaultContractResolver();
+            dcr.DefaultMembersSearchFlags |= System.Reflection.BindingFlags.NonPublic;
+            jss.ContractResolver = dcr;
+
+            return JsonConvert.SerializeObject(pubs, jss);
         }
     }
 }

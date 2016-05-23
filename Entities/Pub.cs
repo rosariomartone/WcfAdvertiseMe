@@ -9,9 +9,10 @@ namespace Entities
     [Serializable]
     public class Pub : IPub
     {
-        private string address;
-        private string name;
-        private string url;
+        public string address;
+        public string name;
+        public string url;
+        public string username;
 
         string IPub.Address
         {
@@ -49,6 +50,20 @@ namespace Entities
             set
             {
                 this.url=value;
+            }
+        }
+
+
+        string IPub.Username
+        {
+            get
+            {
+                return username;
+            }
+
+            set
+            {
+                this.username = value;
             }
         }
     }

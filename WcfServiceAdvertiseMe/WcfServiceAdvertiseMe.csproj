@@ -102,6 +102,10 @@
       <Project>{3a16e1b3-6268-46bf-88a0-edce83693a84}</Project>
       <Name>FactoryEntities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{5b1a7859-0118-4548-8703-6e6f5bb339e9}</Project>
+      <Name>Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -9,6 +9,9 @@ using System.Text;
 using FactoryEntities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Threading;
+using Service;
+using System.Configuration;
 
 namespace WcfServiceAdvertiseMe
 {
@@ -18,15 +21,9 @@ namespace WcfServiceAdvertiseMe
     {
         public string GetPointsByGPSPosition(string gpsPosition)
         {
-            IPub obj = FactoryPub.CreateInstance();
-            obj.Name = "Rosario Martone";
-            obj.Url = "https://github.com/rosariomartone";
-            obj.Address = "166, 1 Newgate CR0 2FE Croydon (Surrey) UK";
+            List<IPub> pubs = PubService.GetPointsByGPSPosition(ConfigurationManager.ConnectionStrings["advertisemeDb"].ConnectionString, "GetPointsByGPSPosition", gpsPosition);
 
-            List<IPub> pubs = new List<IPub>();
-            pubs.Add(obj);
             JsonSerializerSettings jss = new JsonSerializerSettings();
-
             DefaultContractResolver dcr = new DefaultContractResolver();
             dcr.DefaultMembersSearchFlags |= System.Reflection.BindingFlags.NonPublic;
             jss.ContractResolver = dcr;

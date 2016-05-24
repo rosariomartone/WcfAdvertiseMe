@@ -23,12 +23,7 @@ namespace WcfServiceAdvertiseMe
         {
             List<IPub> pubs = PubService.GetPointsByGPSPosition(ConfigurationManager.ConnectionStrings["advertisemeDb"].ConnectionString, "GetPointsByGPSPosition", gpsPosition);
 
-            JsonSerializerSettings jss = new JsonSerializerSettings();
-            DefaultContractResolver dcr = new DefaultContractResolver();
-            dcr.DefaultMembersSearchFlags |= System.Reflection.BindingFlags.NonPublic;
-            jss.ContractResolver = dcr;
-
-            return JsonConvert.SerializeObject(pubs, jss);
+            return JsonConvert.SerializeObject(pubs);
         }
     }
 }

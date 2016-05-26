@@ -3,18 +3,37 @@
 using Entities;
 using DataAccess;
 using System.Data.SqlClient;
-using System.Data;
 using Repository;
+using log4net;
+using System.Reflection;
+using System;
+using System.Data;
 
 namespace Service
 {
     public class PubService
     {
+        readonly static ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public static List<IPub> GetPointsByGPSPosition(string connectionString, string storeProcName, string gpsPosition)
         {
-            var sqlParams = new List<SqlParameter> { new SqlParameter("@GpsPosition", gpsPosition) };
-            
-            return DataTableHelper.MapDataTableToPubs(PubDatabase.GetDataSet(connectionString, storeProcName, sqlParams).Tables[0]);
+            List<SqlParameter> sqlParams = null;
+            DataSet ds = null;
+
+            try
+            {
+                sqlParams = new List<SqlParameter> { new SqlParameter("@GpsPosition", gpsPosition) };
+                ds = PubDatabase.GetDataSet(connectionString, storeProcName, sqlParams);
+            }
+            catch(Exception ex)
+            {
+                Utilities.LogManager.LogError(ex, "Service", "PubService", "GetPointsByGPSPosition", ex.Message);
+            }
+
+            if (ds != null)
+                return DataTableHelper.MapDataTableToPubs(ds.Tables[0]);
+            else
+                return null;
         }
     }
 }
